@@ -1,3 +1,5 @@
+-- misc ui related plugins
+
 return {
   {
     'folke/noice.nvim',
