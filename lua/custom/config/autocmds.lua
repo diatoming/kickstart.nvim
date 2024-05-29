@@ -43,3 +43,17 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = event.buf, silent = true })
   end,
 })
+
+-- Disable the concealing in some file formats
+-- The default conceallevel is 3 in LazyVim
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'markdown', 'mdx' },
+  callback = function()
+    vim.opt_local.conceallevel = 0
+    vim.opt_local.tw = 80
+    vim.opt_local.colorcolumn = '80'
+    -- make gqq work with formatexpr nil
+    vim.opt_local.formatexpr = ''
+    vim.opt_local.wrap = true
+  end,
+})

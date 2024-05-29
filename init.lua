@@ -460,6 +460,10 @@ require('lazy').setup({
         -- tsserver = {},
         astro = {},
 
+        marksman = {
+          filetypes = { 'markdown', 'mdx' },
+        },
+
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -512,7 +516,7 @@ require('lazy').setup({
     lazy = false,
     keys = {
       {
-        '<leader>f',
+        '<leader>cf',
         function()
           require('conform').format { async = true, lsp_fallback = true }
         end,
@@ -541,7 +545,11 @@ require('lazy').setup({
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { 'prettierd', 'prettier' } },
+        ['markdown'] = { { 'prettierd', 'prettier' }, 'markdownlint', 'markdown-toc' },
+        ['markdown.mdx'] = { { 'prettierd', 'prettier' }, 'markdownlint', 'markdown-toc' },
         astro = { 'astro' },
+        yaml = { 'yamlfmt' },
+        json = { 'prettier' },
       },
       formatters = {
         astro = {
@@ -751,6 +759,20 @@ require('lazy').setup({
       --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
       --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+      --
+      -- MDX
+      vim.filetype.add {
+        extension = {
+          mdx = 'mdx',
+        },
+      }
+      if type(opts.ensure_installed) == 'table' then
+        vim.list_extend(opts.ensure_installed, { 'markdown' })
+        vim.treesitter.language.register('markdown', 'mdx')
+      end
+
+      local ft_to_parser = require('nvim-treesitter.parsers').filetype_to_parsername
+      ft_to_parser.mdx = 'markdown'
     end,
   },
 
