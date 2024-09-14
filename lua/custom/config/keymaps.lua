@@ -36,6 +36,8 @@ map('n', '<S-l>', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
 map('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
 map('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
 map('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
+map('n', '<leader>bw', '<cmd>wa<cr>', { desc = 'Save All' })
+map('n', '<leader>bq', '<cmd>qa<cr>', { desc = 'Quit All' })
 
 -- Clear search with <esc>
 map({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and Clear hlsearch' })
@@ -85,9 +87,6 @@ map('n', ']e', diagnostic_goto(true, 'ERROR'), { desc = 'Next Error' })
 map('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
 map('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
 map('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
-
--- quit
-map('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit All' })
 
 -- highlights under cursor
 map('n', '<leader>ui', vim.show_pos, { desc = 'Inspect Pos' })
